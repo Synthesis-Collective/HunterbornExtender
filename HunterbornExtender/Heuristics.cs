@@ -48,7 +48,7 @@ sealed public class Heuristics
             {
                 Write.Title(1, "Tokenizing plugin names.");
                 plugins.ForEach(p => Write.Action(2, $"Plugin: {p.Name} -> {p.Tokens.Pretty()}"));
-                Write.Title(1, "Analyzing NPCs.");
+                Write.Title(1, "Analyzing NPCs");
             }
 
             // Scan the list of npcs.
@@ -83,12 +83,14 @@ sealed public class Heuristics
             DeathItemSelection[] selections = selectionWeights.Keys.ToArray();
             Dictionary<FormKey, PluginEntry> savedSelections = previousSelections.ToDictionary(v => v.DeathItem, v => v.Selection ?? PluginEntry.SKIP);
 
+            if (debuggingMode) Write.Title(1, "Making Selections");
+
             foreach (var selection in selections)
             {
                 if (savedSelections.ContainsKey(selection.DeathItem))
                 {
                     selection.Selection = savedSelections[selection.DeathItem];
-                    if (debuggingMode) Write.Action(3, $"Previously selected {selection.Selection?.ProperName}.");
+                    if (debuggingMode) Write.Action(2, $"Previous selection: {selection.Selection?.ProperName}.");
                 }
                 else
                 {
@@ -102,10 +104,10 @@ sealed public class Heuristics
                     if (debuggingMode && !selection.DeathItem.IsNull)
                     {
                         selection.DeathItem.ToLink<DeathItemGetter>().TryResolve(linkCache, out var deathItem);
-                        Write.Action(2, $"{deathItem?.EditorID ?? deathItem?.ToString() ?? "NO DEATH ITEM"}: heuristic selected {selection.Selection?.SortName}.");
-                        Write.Action(3, $"From: {itemWeights.Pretty()}");
-                        Write.Action(2, $"Archetypes: ");
-                        foreach (var npc in selection.AssignedNPCs.Take(6)) Write.Action(3, Naming.NpcFB(npc));
+                        Write.Action(2, $"Selection: {deathItem?.EditorID ?? deathItem?.ToString() ?? "NO DEATH ITEM"}  =>  {selection.Selection?.SortName}.");
+                        Write.Action(3, $"Weights: {itemWeights.OrderByDescending(pair => pair.Value).Pretty()}");
+                        Write.Action(3, $"Archetypes: ");
+                        foreach (var npc in selection.AssignedNPCs.Take(6)) Write.Action(4, Naming.NpcFB(npc));
                     }
                 }
             }
@@ -164,10 +166,9 @@ sealed public class Heuristics
 
         if (debuggingMode)
         {
-            Write.Action(2, $"Tokens for {description}:");
-            Write.Action(3, npcTokens.Pretty());
-            Write.Success(2, $"Candidates for {description}:");
-            Write.Success(3, candidates.Pretty());
+            Write.Action(2, $"Heuristics for {description} ({npc.FormKey})");
+            Write.Success(3, $"Tokens: {npcTokens.Pretty()}");
+            Write.Success(3, $"Candidates: {candidates.OrderByDescending(pair => pair.Value).Pretty()}");
         }
 
         return candidates;

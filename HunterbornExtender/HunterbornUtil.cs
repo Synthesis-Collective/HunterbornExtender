@@ -180,6 +180,12 @@ namespace HunterbornExtender
 
         public static string Pretty<Tuple>(this Tuple tuple) => "{" + string.Join(", ", tuple.AsEnumerable().Select(Prettify)) + "}";
 
+        public static string Pretty<S, T>(this IOrderedEnumerable<KeyValuePair<S, T>> enumerable) where S : notnull => "{" + string.Join(", ", enumerable) + "}";
+
+        public static string Pretty<S, T>(this IEnumerable<KeyValuePair<S,T>> enumerable) where S : notnull => "{" + string.Join(", ", enumerable) + "}";
+
+        public static string Pretty<T>(this IEnumerable<T> enumerable) => "{" + string.Join(", ", enumerable) + "}";
+
         private static bool IsPretty(this object o) => o.GetType().GetMethod("Pretty") != null;
 
         private static string Prettify<T>(T o) => ((o?.IsPretty() ?? false) ? o?.Pretty() : o?.ToString()) ?? "null";
@@ -204,7 +210,14 @@ namespace HunterbornExtender
             var tokens = TOKENIZER_BREAK_SPLITTER.Split(filtered);
             if (tokens == null || tokens.Length == 0) return new();
 
-            return tokens.SelectMany(t => TOKENIZER_CAMEL_SPLITTER.Split(t)).Where(t => !t.IsNullOrWhitespace()).ToHashSet();
+            var flatTokens = tokens.SelectMany(t => TOKENIZER_CAMEL_SPLITTER.Split(t)).Where(t => !t.IsNullOrWhitespace()).ToHashSet();
+
+            foreach (var tokenGroup in SpecialCases.TokenSynonyms)
+            {
+                if (tokenGroup.Overlaps(flatTokens)) flatTokens.Add(tokenGroup);
+            }
+
+            return flatTokens;
         }
 
         readonly static private Regex TOKENIZER_FILTER = new("[^A-Za-z0-9 _-]");

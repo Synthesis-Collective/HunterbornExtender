@@ -66,7 +66,8 @@ sealed public class SpecialCases
     /// <summary>
     /// Translates known DeathItem editorIDs to proper names and sorting names.
     /// </summary>
-    static readonly public Dictionary<string, List<string>> EditorToNames = new() {
+    static readonly public Dictionary<string, List<string>> EditorToNames = new() 
+    {
         { "BearCave", new() {"Bear", "Cave"} },
         { "BearSnow", new() {"Bear", "Snow"} },
         { "CharusHunter", new() {"Chaurus", "Hunter"} },
@@ -85,6 +86,16 @@ sealed public class SpecialCases
         { "WolfIce", new() {"Wolf", "Ice"} },
         { "TrollFrost", new() {"Troll", "Frost"} },
         { "Boar", new() {"Boar", "Bristleback" } }
+    };
+
+    /// <summary>
+    /// When names are tokenized, if the token list has any one of these sets then it gets every member of the set.
+    /// </summary>
+    static readonly public HashSet<HashSet<string>> TokenSynonyms = new()
+    {
+        new() { "Snow", "Arctic", "Ice" },
+        new() { "Elk", "Deer" },
+        new() { "Dog", "Hound" }
     };
 
     /// <summary>
