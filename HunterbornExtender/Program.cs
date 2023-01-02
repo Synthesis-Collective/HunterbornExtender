@@ -766,6 +766,7 @@ sealed public class Program
         LeveledItem deathDescriptor = PatchMod.LeveledItems.AddNew();
         deathDescriptor.EditorID = $"_DS_DeathItem_{data.InternalName}";
         deathDescriptor.Entries = new();
+        deathDescriptor.Flags = LeveledItem.Flag.UseAll;
 
         // If the pelts FormList isn't empty, then harvesting pelts is enabled.
         if (pelts.Items is not null && pelts.Items.Count > 0)
