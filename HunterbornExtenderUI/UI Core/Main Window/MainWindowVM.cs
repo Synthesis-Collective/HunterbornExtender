@@ -6,6 +6,7 @@ using Noggog.WPF;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using HunterbornExtender.Settings;
+using Noggog.UI;
 
 namespace HunterbornExtenderUI;
 

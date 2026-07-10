@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
 	<TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
     <Nullable>enable</Nullable>
     <WarningsAsErrors>nullable</WarningsAsErrors>
@@ -53,12 +53,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Extended.Wpf.Toolkit" Version="5.0.0" />
-    <PackageReference Include="Mutagen.Bethesda.Json" Version="0.53.1" />
-    <PackageReference Include="Mutagen.Bethesda.Skyrim" Version="0.53.1" />
-    <PackageReference Include="Mutagen.Bethesda.Synthesis" Version="0.35.5" />
-    <PackageReference Include="Mutagen.Bethesda.Synthesis.WPF" Version="0.35.5" />
-    <PackageReference Include="Mutagen.Bethesda.WPF" Version="0.53.1" />
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="5.1.2" />
+    <PackageReference Include="Mutagen.Bethesda.Json" Version="0.54.2" />
+    <PackageReference Include="Mutagen.Bethesda.Skyrim" Version="0.54.2" />
+    <PackageReference Include="Mutagen.Bethesda.Synthesis" Version="0.36.5" />
+    <PackageReference Include="Mutagen.Bethesda.Synthesis.WPF" Version="0.36.5" />
+    <PackageReference Include="Mutagen.Bethesda.WPF" Version="0.54.2" />
     <PackageReference Include="Noggog.Autofac" Version="4.1.0" />
   </ItemGroup>
 

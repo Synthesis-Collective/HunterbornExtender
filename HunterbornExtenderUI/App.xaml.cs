@@ -6,6 +6,7 @@ using HunterbornExtender;
 using Mutagen.Bethesda.Skyrim;
 using Mutagen.Bethesda.Synthesis;
 using Noggog.WPF;
+using ReactiveUI.Builder;
 using static System.Windows.Forms.AxHost;
 
 namespace HunterbornExtenderUI;
@@ -19,6 +20,11 @@ public partial class App : Application
     {
         base.OnStartup(e);
 
+        RxAppBuilder.CreateReactiveUIBuilder()
+            .WithCoreServices()
+            .WithWpf()
+            .BuildApp();
+        
         SynthesisPipeline.Instance
             .SetOpenForSettings(OpenForSettings)
             .AddPatch<ISkyrimMod, ISkyrimModGetter>(RunPatch)

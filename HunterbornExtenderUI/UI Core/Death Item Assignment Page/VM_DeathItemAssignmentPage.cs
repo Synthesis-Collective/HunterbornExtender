@@ -11,6 +11,7 @@ using HunterbornExtender.Settings;
 using HunterbornExtender;
 using System.Windows;
 using HunterbornExtender.IO;
+using Noggog.UI;
 
 namespace HunterbornExtenderUI;
 

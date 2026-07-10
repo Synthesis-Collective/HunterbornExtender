@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using DynamicData.Binding;
+using Noggog.UI;
 using Noggog.WPF;
 using ReactiveUI.Fody.Helpers;
 

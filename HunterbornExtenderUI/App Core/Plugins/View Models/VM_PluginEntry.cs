@@ -11,6 +11,7 @@ using HunterbornExtender.Settings;
 using static System.Windows.Forms.AxHost;
 using System;
 using System.Windows.Media.Media3D;
+using Noggog.UI;
 
 namespace HunterbornExtenderUI;
 

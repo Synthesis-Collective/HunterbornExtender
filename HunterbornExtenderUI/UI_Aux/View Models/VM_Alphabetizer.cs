@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media;
+using Noggog.UI;
 
 namespace HunterbornExtenderUI
 {
@@ -42,7 +43,7 @@ namespace HunterbornExtenderUI
                 Revert();
             });
 
-            SubscribedCollection.ToObservableChangeSet().Throttle(TimeSpan.FromMilliseconds(100), RxApp.MainThreadScheduler).Subscribe(x => GetSortState());
+            SubscribedCollection.ToObservableChangeSet().Throttle(TimeSpan.FromMilliseconds(100), RxSchedulers.MainThreadScheduler).Subscribe(x => GetSortState());
 
             this.WhenAnyValue(x => x.State).Subscribe(x =>
             {
