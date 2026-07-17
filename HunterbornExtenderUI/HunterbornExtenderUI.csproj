@@ -53,6 +53,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Fody" Version="6.8.0">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="ReactiveUI.Fody" Version="19.5.41" />
     <PackageReference Include="Extended.Wpf.Toolkit" Version="5.1.2" />
     <PackageReference Include="Mutagen.Bethesda.Json" Version="0.54.2" />
     <PackageReference Include="Mutagen.Bethesda.Skyrim" Version="0.54.2" />
